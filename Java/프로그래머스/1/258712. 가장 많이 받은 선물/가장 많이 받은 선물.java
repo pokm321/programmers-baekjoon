@@ -42,30 +42,24 @@ class Solution {
         return giftPoints;
     }
 
-
     private static int[] getGiftToReceive(int[][] giftTable, int[] giftPoints, int friendsCount) {
         int[] giftToReceive = new int[friendsCount];
 
         for (int giver = 0; giver < friendsCount; giver++) {
             for (int taker = 0; taker < friendsCount; taker++) {
                 Boolean giverGaveMore = didGiverGiveMore(giftTable, giver, taker);
+                Boolean giverHasMorePoint = doesGiverHaveMorePoint(giftPoints, giver, taker);
 
-                if (giverGaveMore == null) {
-                    Boolean giverHasMorePoint = doesGiverHaveMorePoint(giftPoints, giver, taker);
-                    if (giverHasMorePoint != null && giverHasMorePoint) {
-                        giftToReceive[giver] += 1;
-                    } else if (giverHasMorePoint != null) {
-                        giftToReceive[taker] += 1;
-                    }
-                } else if (giverGaveMore) {
+                if (giverGaveMore != null && giverGaveMore) {
                     giftToReceive[giver] += 1;
-                } else {
-                    giftToReceive[taker] += 1;
+                }
+                if (giverGaveMore == null && giverHasMorePoint != null && giverHasMorePoint) {
+                    giftToReceive[giver] += 1;
                 }
             }
         }
 
-        return Arrays.stream(giftToReceive).map(n -> n / 2).toArray();
+        return giftToReceive;
     }
 
     private static Boolean didGiverGiveMore(int[][] giftTable, int giver, int taker) {
