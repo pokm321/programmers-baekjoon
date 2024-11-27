@@ -48,12 +48,12 @@ class Solution {
         for (int giver = 0; giver < friendsCount; giver++) {
             for (int taker = 0; taker < friendsCount; taker++) {
                 Boolean giverGaveMore = didGiverGiveMore(giftTable, giver, taker);
-                Boolean giverHasMorePoint = doesGiverHaveMorePoint(giftPoints, giver, taker);
+                boolean giverHasMorePoint = doesGiverHaveMorePoint(giftPoints, giver, taker);
 
                 if (giverGaveMore != null && giverGaveMore) {
                     giftToReceive[giver] += 1;
                 }
-                if (giverGaveMore == null && giverHasMorePoint != null && giverHasMorePoint) {
+                if (giverGaveMore == null && giverHasMorePoint) {
                     giftToReceive[giver] += 1;
                 }
             }
@@ -62,6 +62,7 @@ class Solution {
         return giftToReceive;
     }
 
+    
     private static Boolean didGiverGiveMore(int[][] giftTable, int giver, int taker) {
         if (giftTable[giver][taker] == giftTable[taker][giver]) {
             return null;
@@ -70,11 +71,7 @@ class Solution {
         return giftTable[giver][taker] > giftTable[taker][giver];
     }
 
-    private static Boolean doesGiverHaveMorePoint(int[] giftPoints, int giver, int taker) {
-        if (giftPoints[giver] == giftPoints[taker]) {
-            return null;
-        }
-
+    private static boolean doesGiverHaveMorePoint(int[] giftPoints, int giver, int taker) {
         return giftPoints[giver] > giftPoints[taker];
     }
 }
