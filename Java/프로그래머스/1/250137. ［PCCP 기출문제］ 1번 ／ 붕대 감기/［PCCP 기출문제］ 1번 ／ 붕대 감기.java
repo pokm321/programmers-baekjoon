@@ -11,15 +11,12 @@ class Solution {
             health -= attackDamage;
 
             if (health <= 0) {
-                break;
+                return -1;
             }
 
             previousAttackTime = attack[0];
         }
 
-        if (health <= 0) {
-            return -1;
-        }
         return health;
     }
 
