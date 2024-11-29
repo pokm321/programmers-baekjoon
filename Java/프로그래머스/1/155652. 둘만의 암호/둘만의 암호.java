@@ -2,20 +2,19 @@ import java.util.stream.Collectors;
 
 class Solution {
     public String solution(String s, String skip, int index) {
-
         return s.chars()
-                .map(c -> parse(c, skip, index))
+                .map(c -> decode(c, skip, index))
                 .mapToObj(c -> String.valueOf((char) c))
                 .collect(Collectors.joining());
     }
 
-    private int parse(int c, String skip, int index) {
+    private int decode(int c, String skip, int index) {
         for (int i = 0; i < index; i++) {
             do {
                 c = getAlphabet(c + 1);
             } while (skip.contains(String.valueOf((char) c)));
         }
-
+        
         return c;
     }
 
