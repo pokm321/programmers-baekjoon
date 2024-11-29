@@ -1,21 +1,19 @@
-import java.util.List;
 import java.util.stream.Collectors;
 
 class Solution {
     public String solution(String s, String skip, int index) {
-        List<Integer> skipParsed = skip.chars().boxed().collect(Collectors.toList());
 
         return s.chars()
-                .map(c -> parse(c, skipParsed, index))
+                .map(c -> parse(c, skip, index))
                 .mapToObj(c -> String.valueOf((char) c))
                 .collect(Collectors.joining());
     }
 
-    private int parse(int c, List<Integer> skipParsed, int index) {
+    private int parse(int c, String skip, int index) {
         for (int i = 0; i < index; i++) {
             do {
                 c = getAlphabet(c + 1);
-            } while (skipParsed.contains(c));
+            } while (skip.contains(String.valueOf((char) c)));
         }
 
         return c;
