@@ -10,11 +10,11 @@ class Solution {
         
         for (int i = 0; i < score.length; i++) {
             scoreSoFar.add(score[i]);
-            Collections.sort(scoreSoFar, (a, b) -> b - a);
+            Collections.sort(scoreSoFar);
             if (scoreSoFar.size() > k) {
-                scoreSoFar.remove(k);
+                scoreSoFar.remove(0);
             }
-            answer[i] = scoreSoFar.get(scoreSoFar.size() - 1);
+            answer[i] = scoreSoFar.get(0);
         }
         
         return answer;
